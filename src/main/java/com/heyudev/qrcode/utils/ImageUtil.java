@@ -17,6 +17,16 @@ public class ImageUtil {
         return drawFontOnImage(backgroudImage, font, DEFAULT_FONTSIZE, fontLeftLocation, fontTopLocation);
     }
 
+    /**
+     * draw font on image
+     * @param backgroudImage
+     * @param font
+     * @param fontSize
+     * @param fontLeftLocation
+     * @param fontTopLocation
+     * @return
+     * @throws Exception
+     */
     public static BufferedImage drawFontOnImage(BufferedImage backgroudImage, String font, int fontSize, int fontLeftLocation, int fontTopLocation) throws Exception {
         Graphics2D g2d = (Graphics2D) backgroudImage.getGraphics();
         if (!Objects.equals(null, font) && !Objects.equals("", font)) {
@@ -29,6 +39,7 @@ public class ImageUtil {
     }
 
     /**
+     * draw image on image
      * @param backgroudImage
      * @param frontImage
      * @param qrCodeUrl
@@ -46,7 +57,7 @@ public class ImageUtil {
     }
 
     /**
-     *
+     * zoom image
      * @param originalImage
      * @param width
      * @param height
@@ -54,7 +65,7 @@ public class ImageUtil {
      */
     public static BufferedImage zoomImage(BufferedImage originalImage, int width, int height) {
         BufferedImage zoomImage = new BufferedImage(width, width, BufferedImage.TYPE_INT_RGB);
-        zoomImage.getGraphics().drawImage(originalImage.getScaledInstance(width, width, Image.SCALE_SMOOTH), 0, 0, null);
+        zoomImage.getGraphics().drawImage(originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH), 0, 0, null);
         return zoomImage;
     }
 }

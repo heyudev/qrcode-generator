@@ -7,6 +7,7 @@ import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -61,10 +62,24 @@ public class QrCodeUtil {
         return createQrCode(contents, fileDir, fileName, suffix, width, height, config, level, DEFAULT_MARGINBORDER);
     }
 
+    /**
+     * create qrcode
+     *
+     * @param contents     qrcode contents
+     * @param fileDir      temp file dir
+     * @param fileName     temp file name
+     * @param suffix       qrcode image suffix
+     * @param width        qrcode width
+     * @param height       qrcode height
+     * @param config       MatrixToImageConfig
+     * @param level        ErrorCorrectionLevel {M, L, H, Q}
+     * @param marginBorder qrcode margin border
+     * @return
+     * @throws Exception
+     */
     public static File createQrCode(String contents, String fileDir, String fileName, String suffix, int width, int height, MatrixToImageConfig config, ErrorCorrectionLevel level, int marginBorder) throws Exception {
         Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
         hints.put(EncodeHintType.ERROR_CORRECTION, level);
-        hints.put(EncodeHintType.MARGIN, "");
         hints.put(EncodeHintType.CHARACTER_SET, DEFAULT_CHARACTER);
         hints.put(EncodeHintType.MARGIN, marginBorder);
         BitMatrix bitMatrix = new MultiFormatWriter().encode(contents,
@@ -100,8 +115,8 @@ public class QrCodeUtil {
     /**
      * set qrcode logo
      *
-     * @param matrixImage
-     * @param logoPath
+     * @param matrixImage qrcode image
+     * @param logoPath    logo image path
      * @param isUrl       is http url (true) or file path (false)
      * @param ratio       logo ratio
      * @return
